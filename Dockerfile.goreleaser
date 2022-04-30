@@ -1,0 +1,3 @@
+FROM gcr.io/distroless/base
+COPY cue-repeater /go/bin/cue-repeater
+ENTRYPOINT ["/go/bin/cue-repeater"]

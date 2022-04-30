@@ -1,0 +1,32 @@
+project_name: Cue Repeater
+builds:
+   - binary: cue-repeater
+     env:
+        - CGO_ENABLED=0
+     goos:
+        - windows
+        - darwin
+        - linux
+     goarch:
+        - amd64
+     dir: ./
+archives:
+   - id: cue-repeater
+     format: binary
+checksum:
+  name_template: 'checksums.txt'
+snapshot:
+  name_template: "{{ .Tag }}-next"
+changelog:
+  sort: asc
+  filters:
+    exclude:
+       - '^docs:'
+       - '^test:'
+dockers:
+  - dockerfile: Dockerfile.goreleaser
+    image_templates:
+       - "ghcr.io/cycoresystems/cue-repeater:{{ .Tag }}"
+       - "ghcr.io/cycoresystems/cue-repeater:v{{ .Major }}"
+       - "ghcr.io/cycoresystems/cue-repeater:v{{ .Major }}.{{ .Minor }}"
+       - ghcr.io/cycoresystems/cue-repeater:latest
